@@ -66,7 +66,7 @@ class TestWorld(World):
     start = (0, 0)
 
     map = [['o', 'x'],
-           ['o', 'x']]
+           ['~', 'x']]
 
 
 def test_move_obstacle():
@@ -74,7 +74,7 @@ def test_move_obstacle():
     player = Player(TestWorld)
     player.down()
 
-    assert player.position == (0, 1)
+    assert player.position == (0, 0)
 
     player = Player(TestWorld)
     player.right()
