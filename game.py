@@ -2,19 +2,31 @@ class World:
 
     WALL = 'x'
     WATER = '~'
+    STAR = 's'
+    FIELD = 'o'
 
     OBSTACLES = [WALL, WATER]
 
     start = (0, 0)
 
-    map = [ ['o', 'o', 'o', 'o', 'x'],
+    map = [ ['o', 'o', 'o', 'o', 's'],
             ['o', 'o', 'o', 'o', 'x'],
             ['o', 'o', 'o', 'o', 'x'],
             ['o', 'o', 'o', 'o', 'x'],
             ['o', 'o', 'o', 'o', 'o'] ]
 
+
     def __str__(self):
         return "\n".join([" ".join(line) for line in self.map])
+
+    def get_element(self, position):
+        return self.map[position[1]][position[0]]
+
+    def set_element(self, position, element):
+        self.map[position[1]][position[0]] = element
+
+    def is_solved(self):
+        return all([all([e != 's' for e in line]) for line in self.map])
 
 
 class Player:
@@ -47,10 +59,15 @@ class Player:
         if not(0 <= position[1] < len(self.world.map)):
             return False
 
-        if self.world.map[position[1]][position[0]] in World.OBSTACLES:
+        if self.world.get_element(position) in World.OBSTACLES:
             return False
 
+        if self.world.get_element(position) == World.STAR:
+            self.world.set_element(position, World.FIELD)
+
         self.position = position
+
+        self.world.is_solved()
 
         return True
 

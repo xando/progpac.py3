@@ -81,3 +81,23 @@ def test_move_obstacle():
 
     assert player.position == (0, 0)
 
+
+class TestWorldStarts(World):
+
+    start = (0, 0)
+
+    map = [['o', 's'],
+           ['s', 's']]
+
+
+def test_collect_starts():
+
+    player = Player(TestWorldStarts)
+
+    assert not player.world.is_solved()
+
+    player.down()
+    player.right()
+    player.up()
+
+    assert player.world.is_solved()
