@@ -1,3 +1,4 @@
+
 class World:
 
     WALL = 'x'
@@ -27,6 +28,11 @@ class World:
 
     def is_solved(self):
         return all([all([e != 's' for e in line]) for line in self.map])
+
+
+worlds = {
+    '1': World
+}
 
 
 class Player:
