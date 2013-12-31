@@ -79,14 +79,3 @@ class Game:
             'guy': self.player,
         })
 
-
-if __name__ == "__main__":
-
-    script = """
-guy.down()
-guy.right()
-print(world)
-print(guy.position)
-    """
-
-    Game(World, script)
