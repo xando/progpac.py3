@@ -47,6 +47,7 @@ class Player:
 
         self.position = world.start[:]
         self.world = world
+        self.step_record = []
 
     def _move(self, step):
         if step == Player.UP:
@@ -72,6 +73,8 @@ class Player:
             self.world.set_element(position, World.FIELD)
 
         self.position = position
+
+        self.step_record.append(step)
 
         self.world.is_solved()
 

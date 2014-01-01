@@ -103,3 +103,14 @@ def test_collect_starts():
     player.up()
 
     assert player.world.is_solved()
+
+
+def test_step_record():
+
+    player = Player(TestWorldStarts)
+
+    player.down()
+    player.right()
+    player.up()
+
+    assert player.step_record == [2, 1, 0]
