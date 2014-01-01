@@ -113,4 +113,4 @@ def test_step_record():
     player.right()
     player.up()
 
-    assert player.step_record == [2, 1, 0]
+    assert player.step_record == [Player.DOWN, Player.RIGHT, Player.UP]

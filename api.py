@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.ext.restful import Resource, Api, reqparse, abort
-
 from game import worlds, Player
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -30,20 +30,22 @@ class World(Resource):
 
         try:
             # Wohooh, so naive
-            # ToDo: some kind of sandbox
+            # ToDo: some kind of a sandbox
             exec(script, {}, {
                 'world': world,
                 'guy': player,
             })
         except SyntaxError as e:
-            return {
+            return {'success': False, 'data': {
                 "offset": e.offset,
                 "lineno": e.lineno,
                 "text": e.text,
                 "message": e.msg
-            }, 204
+            }}, 204
 
-        return {}, 200
+        return {'success': True, 'data':{
+            'steps': player.step_record
+        }}, 200
 
 
 api.add_resource(World, '/world/<string:hash>')
